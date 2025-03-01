@@ -1,41 +1,31 @@
-# tkinter added as GUI
 import tkinter as tk
 
-# this creates the main window
 root = tk.Tk()
 
 root.title("Temperature Converter")
 root.geometry("500x500")
 root.configure(bg="#FFCDB2")
 
-# Heading
 heading = tk.Label(root, text="Enter temperature", fg="white", bg="#B5828C", font=("Arial", 12))
 heading.pack()
 
-# Get temperature
 Temperature = tk.Entry(root, width=40, bg="white", font=("Arial", 12))
 Temperature.pack(pady=10)
 
-# unit heading
 command = tk.Label(root, text="Enter unit", fg="white", bg="#B5828C", font=("Arial", 12))
 command.pack()
 
-# get Unit
 unit = tk.Entry(root, width=40, bg="white", font=("Arial", 12))
 unit.pack(pady=10)
 
-# unit heading
 convertTo = tk.Label(root, text="Enter in which unit to convert", fg="white", bg="#B5828C", font=("Arial", 12))
 convertTo.pack()
 
-# get Unit
 toUnit = tk.Entry(root, width=40, bg="white", font=("Arial", 12))
 toUnit.pack(pady=10)
 
-# Result label (separate from heading)
 result_label = tk.Label(root, text="", bg="#FFB4A2", font=("Arial", 12))
 result_label.pack(pady=10)
-
 
 def get_Temp():
     get = Temperature.get()
@@ -75,10 +65,7 @@ def get_Temp():
     except ValueError:
         result_label.config(text="Please enter a valid number!", fg="red")
 
-
-# Submit button
 button = tk.Button(root, text="Submit", bg="#FFB4A2", font=("Arial", 12), command=get_Temp)
 button.pack()
 
-# this starts the program
 root.mainloop()
