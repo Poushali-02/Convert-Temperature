@@ -9,7 +9,7 @@ root.geometry("500x500")
 root.configure(bg="#FFCDB2")
 
 # Heading
-heading = tk.Label(root, text="Enter temperature",fg = "white", bg="#B5828C", font=("Arial", 12))
+heading = tk.Label(root, text="Enter temperature", fg="white", bg="#B5828C", font=("Arial", 12))
 heading.pack()
 
 # Get temperature
@@ -17,7 +17,7 @@ Temperature = tk.Entry(root, width=40, bg="white", font=("Arial", 12))
 Temperature.pack(pady=10)
 
 # unit heading
-command = tk.Label(root, text="Enter unit",fg = "white", bg="#B5828C", font=("Arial", 12))
+command = tk.Label(root, text="Enter unit", fg="white", bg="#B5828C", font=("Arial", 12))
 command.pack()
 
 # get Unit
@@ -25,7 +25,7 @@ unit = tk.Entry(root, width=40, bg="white", font=("Arial", 12))
 unit.pack(pady=10)
 
 # unit heading
-convertTo = tk.Label(root, text="Enter in which unit to convert",fg = "white", bg="#B5828C", font=("Arial", 12))
+convertTo = tk.Label(root, text="Enter in which unit to convert", fg="white", bg="#B5828C", font=("Arial", 12))
 convertTo.pack()
 
 # get Unit
@@ -39,48 +39,45 @@ result_label.pack(pady=10)
 
 def get_Temp():
     get = Temperature.get()
-    type = unit.get().strip().lower()
-    toType = toUnit.get().strip().lower()
+    from_unit = unit.get().strip().lower()
+    to_unit = toUnit.get().strip().lower()
+    
     try:
         temp = float(get)
-        if type.lower() in ["celsius", "c"] and toType.lower() in ["kelvin", "k"]:
-            tempC = temp #celcius to kelvin
-            tempK = tempC + 273
-            result_label.config(text=f"{tempC}°C = {tempK} K")
-            
-        elif type.lower() in ["celcius", "c"] and toType.lower() in ["fahrenheit", "f"]:
-            tempC = temp #celcius to fahrenheit
-            tempF = ((9.0 / 5.0) * (tempF)) + 32.0 
-            result_label.config(text=f"{tempC}°C = {tempF}°F")
-          
-        elif type.lower() in ["fahrenheit", "f"] and toType.lower() in ["celcius", "c"]:
-            tempF = temp #fahrenheit to celcius
-            tempC = (tempF - 32.0) * (5.0 / 9.0)
-            result_label.config(text=f"{tempF}°F = {tempC}°C")
-            
-        elif type.lower() in ["fahrenheit", "f"] and toType.lower() in ["kelvin", "k"]:
-            tempF = temp #fahrenheit to kelvin
-            tempC = (tempF - 32.0) * (5.0 / 9.0)
-            tempK = tempC + 273
-            result_label.config(text=f"{tempF}°F = {tempK} K")
-          
-        elif type.lower() in ["kelvin", "k"] and toType.lower() in ["celcius", "c"]:
-            tempK = temp #kelvin to celcius
-            tempC = tempK - 273
-            result_label.config(text=f"{tempK} K = {tempC}°C")
-              
-        elif type.lower() in ["kelvin", "k"] and toType.lower() in ["fahrenheit", "f"]:
-            tempK = temp #kelvin to fahrenheit
-            tempC = tempK - 273
-            result_label.config(text=f"{tempK} K = {tempC}°C")
-        
+
+        if from_unit in ["celsius", "c"] and to_unit in ["kelvin", "k"]:
+            tempK = temp + 273.15  # Celsius to Kelvin
+            result_label.config(text=f"{temp}°C = {tempK} K")
+
+        elif from_unit in ["celsius", "c"] and to_unit in ["fahrenheit", "f"]:
+            tempF = ((9.0 / 5.0) * temp) + 32.0  # Celsius to Fahrenheit
+            result_label.config(text=f"{temp}°C = {tempF}°F")
+
+        elif from_unit in ["fahrenheit", "f"] and to_unit in ["celsius", "c"]:
+            tempC = (temp - 32.0) * (5.0 / 9.0)  # Fahrenheit to Celsius
+            result_label.config(text=f"{temp}°F = {tempC}°C")
+
+        elif from_unit in ["fahrenheit", "f"] and to_unit in ["kelvin", "k"]:
+            tempK = (temp - 32.0) * (5.0 / 9.0) + 273.15  # Fahrenheit to Kelvin
+            result_label.config(text=f"{temp}°F = {tempK} K")
+
+        elif from_unit in ["kelvin", "k"] and to_unit in ["celsius", "c"]:
+            tempC = temp - 273.15  # Kelvin to Celsius
+            result_label.config(text=f"{temp} K = {tempC}°C")
+
+        elif from_unit in ["kelvin", "k"] and to_unit in ["fahrenheit", "f"]:
+            tempF = (temp - 273.15) * (9.0 / 5.0) + 32.0  # Kelvin to Fahrenheit
+            result_label.config(text=f"{temp} K = {tempF}°F")
+
         else:
-            result_label.config(text="Invalid unit! Use C or F or K.", fg="red")
-    except:
-        result_label.config(text="Please enter a valid number!")
+            result_label.config(text="Invalid unit! Use C, F, or K.", fg="red")
+
+    except ValueError:
+        result_label.config(text="Please enter a valid number!", fg="red")
 
 
-button = tk.Button(root, text="Submit", bg="#FFB4A2", font = ("Arial", 12) ,command=get_Temp)
+# Submit button
+button = tk.Button(root, text="Submit", bg="#FFB4A2", font=("Arial", 12), command=get_Temp)
 button.pack()
 
 # this starts the program
