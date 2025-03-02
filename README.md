@@ -12,7 +12,7 @@ This **Temperature Converter** is a simple and interactive **GUI-based** applica
 
 ## Installation 🛠️
 ### Prerequisites 📌
-- Python **3.x** installed on your system.
+- Python **3.13.1** installed on your system.
 
 ### Steps 🏗️
 1. **Clone the repository:**
